@@ -2,6 +2,9 @@
 require("dotenv").config();
 import path from "path";
 
+// Import Logger
+import Logger from "./database/logger";
+
 import express from "express";
 import cors from "cors";
 
@@ -17,7 +20,7 @@ async function main() {
   app.listen(port, async () => {
     Logger.info(`🚀 Projeto rodando no endereço: http://127.0.0.1:${port}`);
 
-    mongoDB.createConection();
+    // mongoDB.createConection();
   });
 }
 
