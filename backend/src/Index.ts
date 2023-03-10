@@ -8,6 +8,9 @@ import Logger from "./database/logger";
 // Import DB
 import mongoDB from "./database/app";
 
+// Routes
+import router from "./routes/Router";
+
 import express from "express";
 import cors from "cors";
 
@@ -19,6 +22,7 @@ async function main() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(express.static("public"));
+  app.use(router);
 
   app.listen(port, async () => {
     Logger.info(`🚀 Projeto rodando no endereço: http://127.0.0.1:${port}`);
