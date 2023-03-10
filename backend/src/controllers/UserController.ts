@@ -4,7 +4,7 @@ import Logger from "../database/logger";
 import { IUser, User } from "../models/User";
 
 const UserController = {
-  async createUser(req: Request, res: Response) {
+  async register(req: Request, res: Response) {
     const { name, email, phone, password, confirmpassword } = req.body;
 
     // validations
@@ -51,3 +51,5 @@ const UserController = {
     }
   },
 };
+
+export default UserController;
