@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { Request, Response } from "express";
 import Logger from "../database/logger";
 import { IUser, User } from "../models/User";
+import bcrypt from "bcryptjs";
 
 const UserController = {
   async register(req: Request, res: Response) {
@@ -48,6 +49,26 @@ const UserController = {
     if (userExists) {
       res.status(422).json({ message: "Por favor, utilize outro e-mail!" });
       return;
+    }
+
+    // create a password
+    const salt = await bcrypt.genSalt(12);
+    const passwordHash = await bcrypt.hash(password, salt);
+
+    // create a user
+    const user = new User({
+      name: name,
+      email: email,
+      phone: phone,
+      password: passwordHash,
+    });
+
+    try {
+      const newUser = await user.save();
+      res.status(201).json({ message: "Usuário criado", newUser });
+      return;
+    } catch (error) {
+      res.status(500).json({ message: error });
     }
   },
 };
