@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import Logger from "../database/logger";
 import { IUser, User } from "../models/User";
 import bcrypt from "bcryptjs";
+import createUserToken from "../helpers/create-user-token";
 
 const UserController = {
   async register(req: Request, res: Response) {
@@ -65,8 +66,8 @@ const UserController = {
 
     try {
       const newUser = await user.save();
-      res.status(201).json({ message: "Usuário criado", newUser });
-      return;
+
+      await createUserToken(newUser, req, res);
     } catch (error) {
       res.status(500).json({ message: error });
     }
