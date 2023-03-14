@@ -3,7 +3,11 @@ import { Request, Response } from "express";
 import Logger from "../database/logger";
 import { IUser, User } from "../models/User";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
+// helpers
 import createUserToken from "../helpers/create-user-token";
+import getToken from "../helpers/get-token";
 
 const UserController = {
   async register(req: Request, res: Response) {
@@ -110,9 +114,13 @@ const UserController = {
   async checkUser(req: Request, res: Response) {
     let currentUser;
 
-    console.log(req.headers.authorization);
-
     if (req.headers.authorization) {
+      const token = getToken(req);
+      const decoded = jwt.verify(token, "nossosecret");
+
+      currentUser = await User.findById(decoded.id);
+
+      currentUser?.password = undefined;
     } else {
       currentUser = null;
     }
