@@ -127,6 +127,19 @@ const UserController = {
 
     res.status(200).send(currentUser);
   },
+
+  async getUserById(req: Request, res: Response) {
+    const id = req.params.id;
+
+    const user = await User.findById(id).select("-password")
+
+    if (!user) {
+      res.status(422).json({ message: "Usuário não encontrado!" });
+      return;
+    }
+
+    res.status(200).json({ user });
+  },
 };
 
 export default UserController;
