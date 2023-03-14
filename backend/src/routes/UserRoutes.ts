@@ -6,5 +6,6 @@ import UserController from "../controllers/UserController";
 
 routerUser.post("/register", UserController.register);
 routerUser.post("/login", UserController.login);
+routerUser.get("/checkuser", UserController.checkUser);
 
 export default routerUser;
