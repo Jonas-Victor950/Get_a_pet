@@ -172,24 +172,42 @@ const UserController = {
       return;
     }
 
-    user?.email = email;
+    user.email = email;
 
     if (!phone) {
       res.status(422).json({ message: "O telefone é obrigatório!" });
       return;
     }
 
-    if (!password) {
-      res.status(422).json({ message: "A senha é obrigatória!" });
+    user.phone = phone;
+
+    if (password != confirmpassword) {
+      res.status(422).json({ message: "As senhas não conferem" });
+    } else if (password === confirmpassword && password != null) {
+      // Creating password
+      const salt = await bcrypt.genSalt(12);
+      const passwordHash = await bcrypt.hash(password, salt);
+
+      user.password = passwordHash;
+    }
+
+    try {
+      // Returns user updated data
+      await User.findByIdAndUpdate(
+        { _id: user._id },
+        { $set: user },
+        { new: true }
+      );
+
+      res.status(200).json({
+        message: "Usuário atualizado com sucesso!",
+      });
+    } catch (error) {
+      res.status(500).json({ message: error });
       return;
     }
 
-    if (!confirmpassword) {
-      res
-        .status(422)
-        .json({ message: "A confirmação de senha é obrigatória!" });
-      return;
-    }
+    console.log(user);
   },
 };
 
