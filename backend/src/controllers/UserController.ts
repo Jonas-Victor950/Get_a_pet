@@ -131,7 +131,7 @@ const UserController = {
   async getUserById(req: Request, res: Response) {
     const id = req.params.id;
 
-    const user = await User.findById(id).select("-password")
+    const user = await User.findById(id).select("-password");
 
     if (!user) {
       res.status(422).json({ message: "Usuário não encontrado!" });
@@ -140,6 +140,11 @@ const UserController = {
 
     res.status(200).json({ user });
   },
+
+  async editUser(req: Request, res: Response) {
+    res.status(200).json({ message: "Deu certo update!" });
+      return;
+  }
 };
 
 export default UserController;
