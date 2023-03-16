@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const userSchema = new Schema<any>(
+const petSchema = new Schema<any>(
   {
     name: { type: String, required: true },
     age: { type: Number, required: true },
@@ -13,10 +13,10 @@ const userSchema = new Schema<any>(
   },
   {
     timestamps: true,
-    collection: "User",
+    collection: "Pet",
   }
 );
 
-const User = model<any>("User", userSchema);
+const Pet = model<any>("Pet", petSchema);
 
-export { User };
+export { Pet };
