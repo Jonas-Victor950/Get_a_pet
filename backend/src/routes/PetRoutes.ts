@@ -8,6 +8,6 @@ import PetController from "../controllers/PetController";
 import checkToken from "../helpers/verify-token";
 import imageUpload from "../helpers/image-upload";
 
-routerPet.post("/create", PetController.create);
+routerPet.post("/create", checkToken, PetController.create);
 
 export default routerPet;

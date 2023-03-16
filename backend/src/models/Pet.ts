@@ -7,9 +7,9 @@ const petSchema = new Schema<any>(
     images: { type: Array, required: true },
     weight: { type: Number, required: true },
     color: { type: String, required: true },
-    available : { type: Boolean},
+    available: { type: Boolean },
     user: Object,
-    adopter: Object
+    adopter: Object,
   },
   {
     timestamps: true,
