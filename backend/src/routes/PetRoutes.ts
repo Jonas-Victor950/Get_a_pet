@@ -14,5 +14,6 @@ routerPet.post(
   imageUpload.array("images"),
   PetController.create
 );
+routerPet.get("/", PetController.getAll);
 
 export default routerPet;

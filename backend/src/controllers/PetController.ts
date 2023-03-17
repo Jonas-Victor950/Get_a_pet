@@ -59,8 +59,8 @@ const PetController = {
     });
 
     images.map((image) => {
-      pet.images.push(image.filename)
-    })
+      pet.images.push(image.filename);
+    });
 
     try {
       const newPet = await pet.save();
@@ -71,6 +71,14 @@ const PetController = {
     } catch (error) {
       res.status(500).json({ message: error });
     }
+  },
+
+  async getAll(req: Request, res: Response) {
+    const pets = await Pet.find().sort("-createdAt");
+
+    res.status(200).json({
+      pets: pets,
+    });
   },
 };
 
