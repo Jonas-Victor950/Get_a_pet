@@ -9,6 +9,8 @@ const PetController = {
   async create(req: Request, res: Response) {
     const { name, age, weight, color } = req.body;
 
+    const images = req.files;
+
     const available = true;
 
     // Images upload
@@ -31,6 +33,11 @@ const PetController = {
       return;
     }
 
+    if (images?.length === 0) {
+      res.status(422).json({ message: "A imagem é obrigatória" });
+      return;
+    }
+
     // Get pet owner
     const token = getToken(req);
     const user = await getUserByToken(token);
@@ -50,6 +57,10 @@ const PetController = {
         phone: user.phone,
       },
     });
+
+    images.map((image) => {
+      pet.images.push(image.filename)
+    })
 
     try {
       const newPet = await pet.save();
