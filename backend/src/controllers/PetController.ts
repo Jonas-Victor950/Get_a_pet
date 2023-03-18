@@ -1,5 +1,6 @@
 import { Pet } from "../models/Pet";
 import { Request, Response } from "express";
+import ObjectId from "mongoose";
 
 // Helpers
 import getToken from "../helpers/get-token";
@@ -90,7 +91,7 @@ const PetController = {
 
     res.status(200).json({
       pets,
-    })
+    });
   },
 
   async getAllUserAdoptions(req: Request, res: Response) {
@@ -102,8 +103,28 @@ const PetController = {
 
     res.status(200).json({
       pets,
+    });
+  },
+
+  async getPetById(req: Request, res: Response) {
+    const id = req.params.id;
+
+    if (!ObjectId.isValidObjectId(id)) {
+      res.status(422).json({ message: "ID inválido" });
+      return;
+    }
+
+    // Check if pet exists
+    const pet = await Pet.findOne({ _id: id });
+
+    if(!pet) {
+      res.status(404).json({message: "Pet não encontrado!"})
+    }
+
+    res.status(201).json({
+      pet: pet
     })
-  }
+  },
 };
 
 export default PetController;
