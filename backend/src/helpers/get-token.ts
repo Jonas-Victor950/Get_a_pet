@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 
 const getToken = (req: Request) => {
   const authHeader = req.headers.authorization;

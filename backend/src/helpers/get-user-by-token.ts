@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import { User } from "../models/User";
-import { Request, Response, NextFunction } from "express";
 
 // get user by jwt token
 const getUserByToken = async (token: any) => {

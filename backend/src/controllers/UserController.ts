@@ -1,7 +1,5 @@
-import mongoose from "mongoose";
 import { Request, Response } from "express";
-import Logger from "../database/logger";
-import { IUser, User } from "../models/User";
+import { User } from "../models/User";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
