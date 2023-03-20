@@ -19,6 +19,12 @@ routerPet.get("/mypets", checkToken, PetController.getAllUserPets);
 routerPet.get("/myadoptions", checkToken, PetController.getAllUserAdoptions);
 routerPet.get("/:id", PetController.getPetById);
 routerPet.delete("/:id", checkToken, PetController.removePetById);
-routerPet.patch("/:id", checkToken, imageUpload.array("images"), PetController.updatePet);
+routerPet.patch(
+  "/:id",
+  checkToken,
+  imageUpload.array("images"),
+  PetController.updatePet
+);
+routerPet.patch("/schedule/:id", checkToken, PetController.schedule);
 
 export default routerPet;
