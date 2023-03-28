@@ -11,19 +11,23 @@ import Login from "./components/pages/Auth/Login";
 import Register from "./components/pages/Auth/Register";
 import Home from "./components/pages/Home";
 
+// context
+import { UserProvider } from "./context/UserContext";
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
-        <Container>
-          <Routes>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-            <Route path="/" element={<Home />}></Route>
-          </Routes>
-        </Container>
-        <Footer />
+        <UserProvider>
+          <Navbar />
+          <Container>
+            <Routes>
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/register" element={<Register />}></Route>
+              <Route path="/" element={<Home />}></Route>
+            </Routes>
+          </Container>
+          <Footer />
+        </UserProvider>
       </BrowserRouter>
     </div>
   );
