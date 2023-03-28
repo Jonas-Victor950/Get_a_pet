@@ -14,6 +14,7 @@ const Register = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    // Send user to DB
   }
 
   return (
