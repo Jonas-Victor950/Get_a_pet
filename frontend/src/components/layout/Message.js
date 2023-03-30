@@ -1,5 +1,5 @@
 import styles from "./Message.module.css";
-import bus from "../../utils/bus"
+import bus from "../../utils/bus";
 import { useState, useEffect } from "react";
 
 const Message = () => {
@@ -8,18 +8,16 @@ const Message = () => {
   const [type, setTipe] = useState("");
 
   useEffect(() => {
-
-    bus.addListener("flash", ({message, type}) => {
-
-      setVisibility(true)
-      setMessage(message)
-      setTipe(type)
+    bus.addListener("flash", ({ message, type }) => {
+      setVisibility(true);
+      setMessage(message);
+      setTipe(type);
 
       setTimeout(() => {
-        setVisibility(false)
-      }, 3000)
-    })
-  }, [])
+        setVisibility(false);
+      }, 3000);
+    });
+  }, []);
 
   return (
     visibility && (

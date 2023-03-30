@@ -22,7 +22,9 @@ const Navbar = () => {
           <Link to="/">Adotar</Link>
         </li>
         {authenticated ? (
-          <p>Logado</p>
+          <>
+            <p>Logado</p>
+          </>
         ) : (
           <>
             {" "}
